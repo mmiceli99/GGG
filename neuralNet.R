@@ -27,8 +27,8 @@ prep <- prep(my_recipe)
 baked <- bake(prep, new_data = train)
 
 nn_model <- mlp(hidden_units = tune(),
-                epochs = 100 %>%, #or 100 or 2507
-              activation="relu")
+                epochs = 100 , #or 100 or 2507
+              activation="relu") %>%
 set_engine("keras") %>% #verbose = 0 prints off less
   set_mode("classification")
 

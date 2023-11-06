@@ -11,6 +11,8 @@ boxplot(bone_length ~ type, data=train)
 boxplot(hair_length ~ type, data=train)
 boxplot(rotting_flesh ~ type, data=train)
 
+ggplot(train) + geom_bar(mapping = aes(x=type))
+
 ggplot(data=train) +
   geom_bar(mapping = aes(x=color, fill=train$type), position = 'dodge')
 

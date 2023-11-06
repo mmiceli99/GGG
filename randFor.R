@@ -18,9 +18,9 @@ train <- train %>%
 my_recipe <- recipe(type ~ ., data=train) %>%
   update_role(id, new_role = "id variable") %>%
   step_mutate_at(color, fn = factor) %>%# turn color into factors
-  
+  step_lencode_glm(color, outcome=vars(type))
   #step_other(all_nominal_predictors(), threshold = .001) %>% # combines categorical values that occur <5% into an "other" value
-  step_dummy(color) # dummy variable encoding
+  #step_dummy(color) # dummy variable encoding
   #step_lencode_mixed(color, outcome = vars(type)) #%>% #target encoding
 #step_smote(all_outcomes(), k=2)
 # also step_lencode_glm() and step_lencode_bayes()

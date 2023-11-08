@@ -27,15 +27,14 @@ prep <- prep(my_recipe)
 baked <- bake(prep, new_data = train)
 
 nn_model <- mlp(hidden_units = tune(),
-                epochs = 100 , #or 100 or 2507
-              activation="relu") %>%
-set_engine("keras") %>% #verbose = 0 prints off less
+                epochs = 500) %>%
+set_engine("nnet") %>% #verbose = 0 prints off less
   set_mode("classification")
 
-nn_tuneGrid <- grid_regular(hidden_units(range=c(1, 80)),
+nn_tuneGrid <- grid_regular(hidden_units(range=c(1, 10)),
                             levels=200)
 
-folds <- vfold_cv(train, v = 5, repeats=1)
+folds <- vfold_cv(train, v = 6, repeats=1)
 
 nn_workflow <- workflow() %>%
   add_recipe(my_recipe) %>%
@@ -47,7 +46,7 @@ tuned_nn <- nn_workflow %>%
             metrics=metric_set(accuracy))
 
 tuned_nn %>% collect_metrics() %>%
-filter(.metric=="accuracy") %>%
+filter(.metric=="accuracy") #%>%
 #ggplot(aes(x=hidden_units, y=mean)) + geom_line()
 
 

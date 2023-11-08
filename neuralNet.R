@@ -48,7 +48,7 @@ tuned_nn <- nn_workflow %>%
 
 tuned_nn %>% collect_metrics() %>%
 filter(.metric=="accuracy") %>%
-ggplot(aes(x=hidden_units, y=mean)) + geom_line()
+#ggplot(aes(x=hidden_units, y=mean)) + geom_line()
 
 
 
